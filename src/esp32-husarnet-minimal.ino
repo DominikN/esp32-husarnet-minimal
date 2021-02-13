@@ -6,11 +6,6 @@
 
 #define HTTP_PORT 80
 
-AsyncWebServer server(HTTP_PORT);
-
-extern const char index_html_start[] asm("_binary_src_index_html_start");
-const String html = String((const char*)index_html_start);
-
 /* WiFi credentials */
 const char* ssid = "my-wifi-network";
 const char* pswd = "my-wifi-password";
@@ -18,6 +13,12 @@ const char* pswd = "my-wifi-password";
 /* Husarnet credentials (visit app.husarnet.com to get your JoinCode) */
 const char* hostName = "esp32-webserver";
 const char* JoinCode = "fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/xxxxxxxxxxxxxxxxxxxxxx";
+
+/* store index.html content in html constant variable (platformio feature) */
+extern const char index_html_start[] asm("_binary_src_index_html_start");
+const String html = String((const char*)index_html_start);
+
+AsyncWebServer server(HTTP_PORT);
 
 void setup() {
   Serial.begin(115200);
